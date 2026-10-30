@@ -40,7 +40,7 @@ const SHOW_EMPTY_SLOTS = true;
       v.src = slot.dataset.video + '#t=0.1';
     } else {
       const im = new Image();
-      im.alt = slot.dataset.alt || cap; im.loading = 'lazy';
+      im.alt = slot.dataset.alt || cap;
       im.onload = () => replace(im);
       im.src = slot.dataset.img;
     }
