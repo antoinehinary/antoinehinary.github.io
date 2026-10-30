@@ -30,9 +30,14 @@ const SHOW_EMPTY_SLOTS = true;
     };
     if (slot.dataset.video) {
       const v = document.createElement('video');
-      v.muted = true; v.playsInline = true; v.controls = true; v.loop = true; v.preload = 'metadata';
-      v.addEventListener('loadedmetadata', () => replace(v), { once: true });
-      v.src = slot.dataset.video;
+      v.muted = true; v.playsInline = true; v.controls = true; v.loop = true; v.preload = 'auto';
+      v.addEventListener('loadedmetadata', () => {
+        replace(v);
+        new IntersectionObserver((entries) => entries.forEach((e) => {
+          if (e.isIntersecting) v.play().catch(() => {}); else v.pause();
+        }), { threshold: 0.4 }).observe(v);
+      }, { once: true });
+      v.src = slot.dataset.video + '#t=0.1';
     } else {
       const im = new Image();
       im.alt = slot.dataset.alt || cap; im.loading = 'lazy';
