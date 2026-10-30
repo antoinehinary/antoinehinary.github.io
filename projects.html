@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Projects · Antoine Hinary</title>
+<meta name="description" content="Robotics projects by Antoine Hinary: 6D pose estimation, flexible robots, rovers, drones, MPC and embedded systems.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Michroma&family=Manrope:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+
+<nav class="nav" aria-label="Main">
+  <a class="brand" href="index.html">ANTOINE HINARY</a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="projects.html" aria-current="page">Projects</a>
+    <a href="certificates.html">Certificates</a>
+    <a href="beyond.html">Beyond the lab</a>
+  </div>
+  <a class="nav-cv" href="reports/Antoine_Hinary_CV.pdf" target="_blank" rel="noopener">Download CV</a>
+  <button class="menu-btn" type="button" aria-expanded="false">Menu</button>
+</nav>
+
+<header class="page-hero">
+  <div class="wrap">
+    <p class="eyebrow ice">Projects</p>
+    <h1 class="display">Built, flown,<br>driven, docked</h1>
+    <p class="lead">Perception, control and hardware projects from EPFL, industry and competition, plus the teams and communities I've led. Reports are linked where they exist.</p>
+    <div class="filters" role="group" aria-label="Filter projects">
+      <button class="chip" type="button" data-filter="all" aria-pressed="true">All</button>
+      <button class="chip" type="button" data-filter="perception" aria-pressed="false">Perception &amp; ML</button>
+      <button class="chip" type="button" data-filter="control" aria-pressed="false">Control</button>
+      <button class="chip" type="button" data-filter="hardware" aria-pressed="false">Hardware &amp; embedded</button>
+      <button class="chip" type="button" data-filter="leadership" aria-pressed="false">Leadership</button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+<!-- ================= ENGINEERING ================= -->
+<div class="group">
+  <div class="group-title"><h2 class="display">Engineering</h2><span class="eyebrow">Robotics · ML · Control · Embedded</span></div>
+
+  <!-- MASTER THESIS -->
+  <article class="project" id="thesis" data-tags="perception control">
+    <div class="text">
+      <div class="ctx"><span class="eyebrow ice">Master thesis · Grivix, Zurich</span><span class="eyebrow">10/2025 – 04/2026</span></div>
+      <h3>Synthetic-only 6D pose estimation for robotic megawatt charging</h3>
+      <p class="desc">Electric trucks charge at megawatt power through a connector with sub-centimetre tolerances, so plugging in is a job for a robot. I built a monocular RGB pipeline that learns the inlet's 6D pose only from CAD-generated images, then drives a UR5e arm to dock the charger.</p>
+      <ul class="points">
+        <li>Photorealistic synthetic datasets in BlenderProc with domain randomization and sensor-effect injection</li>
+        <li>YOLOv11-Pose keypoints with EPnP + RANSAC, closed-loop visual servoing</li>
+        <li>ONNX export and TensorRT acceleration on a Jetson Orin AGX</li>
+        <li>More than 300 fully autonomous docking trials on real hardware</li>
+      </ul>
+      <div class="figs">
+        <div class="fig"><b>1.77 mm</b><span>translation error</span></div>
+        <div class="fig"><b>4.5°</b><span>rotation error</span></div>
+        <div class="fig"><b>94%</b><span>alignment success</span></div>
+        <div class="fig"><b>40 ms</b><span>latency, ≈25 FPS</span></div>
+      </div>
+      <div class="tags"><span>PyTorch</span><span>YOLOv11-Pose</span><span>BlenderProc</span><span>ONNX</span><span>TensorRT</span><span>Jetson Orin</span><span>UR5e</span></div>
+      <div class="actions"><a class="btn ghost" href="reports/master-thesis.pdf" target="_blank" rel="noopener">Read the thesis (PDF)</a></div>
+    </div>
+    <div class="media">
+      <figure class="frame"><video src="assets/video/thesis-demo.mp4" poster="assets/img/thesis-demo-poster.jpg" muted loop playsinline controls preload="metadata"></video><span class="readout">DEMO · ALIGN + DOCK</span></figure>
+      <div class="g3">
+        <figure class="sq"><img src="assets/img/thesis-synthetic-1.jpg" alt="Synthetic render of the charging inlet on rocks" loading="lazy"><figcaption>Synthetic sample</figcaption></figure>
+        <figure class="sq"><img src="assets/img/thesis-synthetic-2.jpg" alt="Synthetic render of the charging inlet on a table" loading="lazy"><figcaption>Synthetic sample</figcaption></figure>
+        <figure class="sq"><img src="assets/img/thesis-gt-board.jpg" alt="Charging inlet surrounded by ArUco markers" loading="lazy"><figcaption>Ground-truth board</figcaption></figure>
+      </div>
+      <figure class="wide on-white"><img src="assets/img/thesis-station-cad.jpg" alt="CAD model of the charging station with the robot arm" loading="lazy"><figcaption>Charging station concept (CAD)</figcaption></figure>
+      <figure class="slot" data-video="assets/video/thesis-docking.mp4" data-caption="Full docking trial">
+        <span class="eyebrow">Optional video slot</span><p>A full docking trial or the live keypoint overlay.</p><code>assets/video/thesis-docking.mp4</code>
+      </figure>
+    </div>
+  </article>
+
+  <!-- FLEXIBLE CHARGING ROBOT -->
+  <article class="project flip" id="flex-robot" data-tags="hardware">
+    <div class="text">
+      <div class="ctx"><span class="eyebrow ice">Robotics engineer · Grivix, Zurich</span><span class="eyebrow">02/2025 – 10/2025</span></div>
+      <h3>Flexible 6-DoF charging robot</h3>
+      <p class="desc">A ceiling-mounted robot that brings a full-size charging connector to the vehicle. I led the mechanical architecture in Fusion, dimensioned the actuators, and 3D-printed the structure in flexible materials so the arm stays compliant around people and cars.</p>
+      <ul class="points">
+        <li>Mechanical architecture and CAD of the 6-DoF manipulator</li>
+        <li>Actuator selection and torque sizing from load analysis</li>
+        <li>Motion constraints defined from the application requirements</li>
+        <li>Structure printed in flexible materials for built-in compliance</li>
+      </ul>
+      <div class="figs">
+        <div class="fig"><b>6 DoF</b><span>manipulator</span></div>
+        <div class="fig"><b>3D-printed</b><span>flexible structure</span></div>
+      </div>
+      <div class="tags"><span>Fusion</span><span>Actuator sizing</span><span>Load analysis</span><span>3D printing</span><span>Flexible materials</span></div>
+    </div>
+    <div class="media">
+      <figure class="slot" data-video="assets/video/flex-robot.mp4" data-caption="The flexible robot in motion">
+        <span class="eyebrow">Video slot</span><p>The robot moving the connector.</p><code>assets/video/flex-robot.mp4</code>
+      </figure>
+      <figure class="cover"><img src="assets/img/flex-robot.jpg" alt="Ceiling-mounted flexible robot arm holding an EV charging connector in the lab" loading="lazy"><figcaption>Prototype in the lab</figcaption></figure>
+    </div>
+  </article>
+
+  <!-- NEUROVIA -->
+  <article class="project" id="neurovia" data-tags="hardware">
+    <div class="text">
+      <div class="ctx"><span class="eyebrow ice">VP of Product Development · Neurovia Bioelectronics, Geneva</span><span class="eyebrow">01/2026 – now</span></div>
+      <h3>Cortical neurostimulation system</h3>
+      <p class="desc">Hardware and software that let clinicians choose which electrodes of a cortical array deliver stimulation. Details are confidential, so the visual on this page is illustrative.</p>
+      <ul class="points">
+        <li>Multiplexer PCB that routes stimulation to selected channels of an ECoG array</li>
+        <li>STM32 firmware in C for channel switching, real-time fault detection and safety monitoring</li>
+        <li>Cross-platform desktop and web interface to select electrodes and talk to the clinical stimulator</li>
+      </ul>
+      <div class="tags"><span>PCB design</span><span>STM32</span><span>Embedded C</span><span>Serial protocols</span><span>Medical devices</span></div>
+    </div>
+    <div class="media">
+      <figure class="ecog"><canvas id="ecog" aria-label="Illustration of an electrode grid with two channels selected by a multiplexer"></canvas></figure>
+      <figcaption>Illustration: an electrode grid with channels selected through a multiplexer</figcaption>
+    </div>
+  </article>
+
+  <!-- ERC / XPLORE (engineering + leadership) -->
+  <article class="project flip" id="erc" data-tags="leadership hardware">
+    <div class="text">
+      <div class="ctx"><span class="eyebrow ice">Project Manager &amp; Vice President · EPFL Xplore</span><span class="eyebrow">09/2024 – 09/2025</span></div>
+      <h3>Phoenyx rover · ERC 2025 champions</h3>
+      <p class="desc">EPFL Xplore builds Mars rovers and drones for international competitions. I led the competition team of 60+ engineers, and in August 2025 our rover Phoenyx took first place overall at the European Rover Challenge at AGH University in Kraków. It was the team's first win at the ERC, and our drone Zephyr also won the Drone Excellency Award.</p>
+      <ul class="points">
+        <li>Coordinated integration across mechanical, electrical and software subsystems</li>
+        <li>Owned timelines, technical milestones and system-level readiness</li>
+        <li>Led validation and testing before competition deployment</li>
+      </ul>
+      <div class="figs">
+        <div class="fig"><b>1st</b><span>overall, ERC 2025</span></div>
+        <div class="fig"><b>25</b><span>finalist teams</span></div>
+        <div class="fig"><b>12</b><span>countries</span></div>
+        <div class="fig"><b>60+</b><span>engineers led</span></div>
+      </div>
+      <div class="tags"><span>Systems engineering</span><span>Project management</span><span>Integration &amp; testing</span></div>
+    </div>
+    <div class="media">
+      <figure><img src="assets/img/erc-winners.jpg" alt="EPFL Xplore team on stage with the first place award at ERC 2025" loading="lazy"><figcaption>First place award, ERC 2025, Kraków</figcaption></figure>
+      <div class="g2">
+        <figure class="cover"><img src="assets/img/erc-rover-arena.jpg" alt="Phoenyx rover on the Mars-like gravel course" loading="lazy"><figcaption>Phoenyx on the course</figcaption></figure>
+        <figure class="cover"><img src="assets/img/erc-team-carry.jpg" alt="Antoine and a teammate carrying the Phoenyx rover" loading="lazy"><figcaption>Carrying Phoenyx · photo @arcazja</figcaption></figure>
+      </div>
+    </div>
+  </article>
+
+  <!-- AVIAN DRONE -->
+  <article class="project" id="drone" data-tags="control hardware">
+    <div class="text">
+      <div class="ctx"><span class="eyebrow ice">Semester project · EPFL Laboratory of Intelligent Systems</span><span class="eyebrow">09/2024 – 01/2025</span></div>
+      <h3>Body-rate controller for an avian-inspired drone</h3>
+      <p class="desc">The LisRaptor steers with morphing wings and tail instead of only propellers. I wrote a body-rate controller that uses every actuator to track attitude setpoints, running inside the PX4 autopilot with no external onboard computer.</p>
+      <ul class="points">
+        <li>Custom control laws and actuator allocation in PX4 firmware (C++)</li>
+        <li>Allocation from an effectiveness and sensitivity matrix of the morphing surfaces</li>
+        <li>Real-time estimation and control loops, MAVLink for testing</li>
+        <li>Validated in simulation and on hardware</li>
+      </ul>
+      <div class="figs">
+        <div class="fig"><b>7 DoF</b><span>thrust + 6 surfaces</span></div>
+        <div class="fig"><b>PX4</b><span>on the flight controller</span></div>
+        <div class="fig"><b>0</b><span>companion computers</span></div>
+      </div>
+      <div class="tags"><span>PX4</span><span>C++</span><span>MAVLink</span><span>QGroundControl</span><span>Control allocation</span></div>
+      <div class="actions"><a class="btn ghost" href="reports/avian-drone-body-rate-controller.pdf" target="_blank" rel="noopener">Read the report (PDF)</a></div>
+    </div>
+    <div class="media">
+      <figure class="slot" data-video="assets/video/drone-flight.mp4" data-caption="Controller test: roll through wing sweep">
+        <span class="eyebrow">Video slot</span><p>Test video of the controller on the drone.</p><code>assets/video/drone-flight.mp4</code>
+      </figure>
+      <figure><img src="assets/img/drone-lab.jpg" alt="The avian-inspired drone with spread wings in the flight arena" loading="lazy"><figcaption>LisRaptor in the EPFL flight arena</figcaption></figure>
+    </div>
+  </article>
+
+  <!-- MINI RACE CAR -->
+  <article class="project flip" id="race-car" data-tags="control">
+    <div class="text">
+      <div class="ctx"><span class="eyebrow ice">Autonomous driving · ROS 2</span></div>
+      <h3>Autonomous mini race car</h3>
+      <p class="desc">An autonomy stack for a miniature race car in ROS 2: planning, path tracking and predictive control, developed and tuned in simulation before running on the car.</p>
+      <ul class="points">
+        <li>Path tracking and spline following on a closed track</li>
+        <li>Local planning and safety filtering for collision avoidance</li>
+        <li>Data-driven predictive control (DeePC) implemented in C++</li>
+      </ul>
+      <div class="tags"><span>ROS 2</span><span>C++</span><span>Eigen</span><span>RViz</span><span>DeePC</span></div>
+    </div>
+    <div class="media">
+      <figure class="slot" data-video="assets/video/race-car.mp4" data-caption="The car driving the track">
+        <span class="eyebrow">Video slot</span><p>The car on the track or the simulation run.</p><code>assets/video/race-car.mp4</code>
+      </figure>
+      <div class="g2">
+        <figure class="cover"><img src="assets/img/race-car-rviz-2.jpg" alt="RViz view of the car following the planned path on the track" loading="lazy"><figcaption>Planned path through a corner (RViz)</figcaption></figure>
+        <figure class="cover"><img src="assets/img/race-car-rviz-1.jpg" alt="RViz view of the car with its predicted trajectory" loading="lazy"><figcaption>Predicted trajectory (RViz)</figcaption></figure>
+      </div>
+    </div>
+  </article>
+
+  <!-- ROCKET MPC -->
+  <article class="project" id="rocket" data-tags="control">
+    <div class="text">
+      <div class="ctx"><span class="eyebrow ice">Course project · EPFL Model Predictive Control</span><span class="eyebrow">01/2024</span></div>
+      <h3>Model predictive control of a thrust-vectored rocket</h3>
+      <p class="desc">A small rocket prototype steered by gimballed racing propellers. With Nour Lachat and Aubane Lachat, I designed linear and nonlinear MPC controllers that fly it along a 3D path, robust to a changing mass and to actuation delay.</p>
+      <ul class="points">
+        <li>12-state model split into four independent subsystems (x, y, z, roll)</li>
+        <li>Linear MPC with terminal invariant sets, tracking and soft constraints</li>
+        <li>Offset-free tracking with a disturbance estimator under changing mass</li>
+        <li>Nonlinear MPC (RK4) with delay compensation</li>
+      </ul>
+      <div class="figs">
+        <div class="fig"><b>12</b><span>states</span></div>
+        <div class="fig"><b>4</b><span>subsystems</span></div>
+        <div class="fig"><b>NMPC</b><span>delay-compensated</span></div>
+      </div>
+      <div class="tags"><span>MATLAB</span><span>MPC</span><span>NMPC</span><span>YALMIP</span><span>MPT3</span></div>
+      <div class="actions"><a class="btn ghost" href="reports/rocket-mpc.pdf" target="_blank" rel="noopener">Read the report (PDF)</a></div>
+    </div>
+    <div class="media">
+      <figure class="on-white"><img src="assets/img/rocket-trajectory.jpg" alt="3D plot of the rocket tracking a reference path" loading="lazy"><figcaption>NMPC tracking a 3D reference path</figcaption></figure>
+      <figure class="slot" data-video="assets/video/rocket-sim.mp4" data-caption="Rocket simulation">
+        <span class="eyebrow">Optional video slot</span><p>Screen recording of the simulation.</p><code>assets/video/rocket-sim.mp4</code>
+      </figure>
+    </div>
+  </article>
+
+  <!-- FPGA -->
+  <article class="project flip" id="fpga" data-tags="hardware perception">
+    <div class="text">
+      <div class="ctx"><span class="eyebrow ice">Course project · EPFL Embedded Systems Design</span></div>
+      <h3>Real-time movement detection on an FPGA</h3>
+      <p class="desc">Camera in, HDMI out: Sobel edges and frame differencing to show what moves. With Marc Nassif, I profiled the pipeline and moved the bottlenecks into hardware until the video was responsive.</p>
+      <ul class="points">
+        <li>DMA-fed Sobel filtering and separable filters</li>
+        <li>Custom Verilog instructions for the kernel and movement decoding</li>
+        <li>Word-level bit packing to cut memory traffic and CPU stalls</li>
+      </ul>
+      <div class="figs">
+        <div class="fig"><b>15×</b><span>fewer cycles</span></div>
+        <div class="fig"><b>0.3 → 5</b><span>frames per second</span></div>
+      </div>
+      <div class="tags"><span>C</span><span>Verilog</span><span>FPGA</span><span>DMA</span></div>
+      <div class="actions">
+        <a class="btn ghost" href="https://youtu.be/5rFBaMkaR-A" target="_blank" rel="noopener">Watch on YouTube</a>
+        <a class="btn ghost" href="reports/fpga-movement-detection.pdf" target="_blank" rel="noopener">Read the report (PDF)</a>
+      </div>
+    </div>
+    <div class="media">
+      <figure class="slot" data-img="assets/img/fpga-demo.jpg" data-caption="Edge and movement output">
+        <span class="eyebrow">Image slot</span><p>A frame from the YouTube demo or a photo of the board.</p><code>assets/img/fpga-demo.jpg</code>
+      </figure>
+    </div>
+  </article>
+</div>
+
+<!-- ================= LEADERSHIP ================= -->
+<div class="group">
+  <div class="group-title"><h2 class="display">Leadership &amp; community</h2><span class="eyebrow">Founding · Leading · Connecting</span></div>
+
+  <article class="project" id="egypoly" data-tags="leadership">
+    <div class="text">
+      <div class="ctx"><span class="eyebrow ice">Founder &amp; President · 3 consecutive years</span></div>
+      <h3>Egypoly, Egyptian students at EPFL</h3>
+      <p class="desc">I founded Egypoly, EPFL's association for Egyptian students, and led it as president for three consecutive years. It gives newcomers a community from their first week: integration days, association dinners, movie nights, football games and cultural evenings.</p>
+      <div class="figs">
+        <div class="fig"><b>Founder</b><span>created the association</span></div>
+        <div class="fig"><b>3 years</b><span>as president</span></div>
+      </div>
+      <div class="tags"><span>Founding</span><span>Community building</span><span>Event organisation</span></div>
+    </div>
+    <div class="media">
+      <figure><img src="assets/img/egypoly-community.jpg" alt="Egypoly members gathered at an EPFL event" loading="lazy"><figcaption>Egypoly community event at EPFL</figcaption></figure>
+      <figure><img src="assets/img/egypoly-event.jpg" alt="Egypoly members in an EPFL classroom" loading="lazy"><figcaption>Welcoming new students</figcaption></figure>
+    </div>
+  </article>
+
+  <article class="project flip" id="wilbe" data-tags="leadership">
+    <div class="text">
+      <div class="ctx"><span class="eyebrow ice">Regional Captain · Wilbe</span></div>
+      <h3>Wilbe Venture regional captain</h3>
+      <p class="desc">Wilbe is a London-based community and pre-seed investor for scientist founders building deep-tech ventures. As a regional captain, I bring researchers and engineers in my region into that community and connect them with the people and resources to start companies.</p>
+      <div class="tags"><span>Deep tech</span><span>Venture building</span><span>Community</span></div>
+    </div>
+    <div class="media">
+      <figure class="slot" data-img="assets/img/wilbe.jpg" data-caption="Wilbe event">
+        <span class="eyebrow">Image slot</span><p>A photo from a Wilbe event you organised or attended.</p><code>assets/img/wilbe.jpg</code>
+      </figure>
+    </div>
+  </article>
+</div>
+
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <div style="display:grid; gap:14px">
+      <h2 class="display">Let's build robots</h2>
+      <p class="copy">antoine.ihinary@gmail.com</p>
+    </div>
+    <div><p class="eyebrow">Pages</p><ul><li><a href="index.html">Home</a></li><li><a href="certificates.html">Certificates</a></li><li><a href="beyond.html">Beyond the lab</a></li></ul></div>
+    <div><p class="eyebrow">Elsewhere</p><ul>
+      <li><a href="https://www.linkedin.com/in/antoine-hinary/" target="_blank" rel="noopener">LinkedIn</a></li>
+      <li><a href="https://github.com/antoinehinary" target="_blank" rel="noopener">GitHub</a></li>
+      <li><a href="reports/Antoine_Hinary_CV.pdf" target="_blank" rel="noopener">CV (PDF)</a></li>
+    </ul></div>
+  </div>
+</footer>
+
+<script src="assets/js/site.js"></script>
+</body>
+</html>
