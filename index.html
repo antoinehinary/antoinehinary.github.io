@@ -1,0 +1,429 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Antoine Hinary</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Antoine Hinary, robotics engineer: perception, control and embedded systems. Projects, reports and experience.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a single engineering-datasheet column. Each project is a spec block:
+   text + key figures on the left, media on the right; hairline rules between blocks. */
+:root{
+  --paper:#f2f4f6;      /* cool drafting-paper ground */
+  --sheet:#ffffff;      /* raised surfaces (media frames) */
+  --ink:#16202a;        /* body text */
+  --ink-2:#4f5d6b;      /* secondary text */
+  --rule:#d5dbe1;       /* hairlines */
+  --cobalt:#2a55c9;     /* accent: links, figures */
+  --cobalt-soft:#e3eafb;
+  --todo:#b85c00;       /* placeholder markers only */
+  --todo-soft:#fff4e6;
+  --f-display:"Archivo", "Helvetica Neue", Arial, sans-serif;
+  --f-body:"IBM Plex Sans", "Segoe UI", Roboto, sans-serif;
+  --f-mono:"JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --measure:64ch;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#10161d; --sheet:#18212b; --ink:#e4e9ee; --ink-2:#9aa8b6; --rule:#2a3540;
+    --cobalt:#8eaaf5; --cobalt-soft:#1d2a47; --todo:#f0a050; --todo-soft:#2c2114; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#10161d; --sheet:#18212b; --ink:#e4e9ee; --ink-2:#9aa8b6; --rule:#2a3540;
+  --cobalt:#8eaaf5; --cobalt-soft:#1d2a47; --todo:#f0a050; --todo-soft:#2c2114; color-scheme:dark;
+}
+
+*{box-sizing:border-box}
+body{
+  background:var(--paper); color:var(--ink);
+  font:400 1rem/1.6 var(--f-body);
+  padding-left:max(16px, env(safe-area-inset-left, 0px));
+  padding-right:max(16px, env(safe-area-inset-right, 0px));
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1120px; margin:0 auto}
+a{color:var(--cobalt); text-underline-offset:3px}
+a:focus-visible, button:focus-visible{outline:2px solid var(--cobalt); outline-offset:3px; border-radius:2px}
+h1,h2,h3{font-family:var(--f-display); text-wrap:balance; margin:0}
+p{margin:0}
+.mono{font-family:var(--f-mono)}
+.label{font:500 .72rem/1.2 var(--f-mono); letter-spacing:.08em; text-transform:uppercase; color:var(--ink-2)}
+
+/* ---------- Header ---------- */
+header.top{padding-block:clamp(40px,8vw,88px) 40px; display:grid; gap:28px; border-bottom:1px solid var(--ink)}
+.name{font-size:clamp(2.6rem,9vw,6.2rem); font-weight:800; font-stretch:118%; letter-spacing:-.02em; line-height:.92}
+.role{font:500 clamp(1.05rem,2.2vw,1.35rem)/1.4 var(--f-body); max-width:var(--measure)}
+.role em{font-style:normal; color:var(--cobalt)}
+.meta{display:flex; flex-wrap:wrap; gap:10px 28px; align-items:baseline}
+.meta span, .meta a{font:400 .9rem/1.4 var(--f-mono)}
+.btn{display:inline-flex; align-items:center; gap:8px; padding:9px 14px; border:1px solid var(--ink); color:var(--ink);
+  text-decoration:none; font:500 .85rem/1 var(--f-mono); background:transparent; cursor:pointer}
+.btn:hover{background:var(--ink); color:var(--paper)}
+.btn.primary{background:var(--ink); color:var(--paper)}
+.btn.primary:hover{background:var(--cobalt); border-color:var(--cobalt)}
+.actions{display:flex; flex-wrap:wrap; gap:10px}
+
+/* ---------- Section heads ---------- */
+section.block{padding-block:56px 8px}
+.sec-head{display:flex; justify-content:space-between; align-items:baseline; gap:16px; flex-wrap:wrap; margin-bottom:8px}
+.sec-head h2{font-size:clamp(1.5rem,3.4vw,2.1rem); font-weight:700; font-stretch:110%}
+
+/* ---------- Project spec block ---------- */
+.project{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.15fr); gap:clamp(24px,4vw,56px);
+  padding-block:44px; border-top:1px solid var(--rule)}
+.project:first-of-type{border-top:0}
+.project .text{display:grid; gap:16px; align-content:start; min-width:0}
+.project h3{font-size:clamp(1.3rem,2.6vw,1.75rem); font-weight:700; line-height:1.15; font-stretch:105%}
+.ctx{display:flex; flex-wrap:wrap; gap:6px 16px}
+.desc{color:var(--ink); max-width:var(--measure)}
+.desc + .desc{margin-top:-4px}
+ul.points{margin:0; padding-left:1.1em; display:grid; gap:6px; color:var(--ink)}
+ul.points li::marker{color:var(--cobalt)}
+
+/* figures strip: the real numbers of each project */
+.figs{display:grid; grid-template-columns:repeat(auto-fit,minmax(118px,1fr)); border-top:1px solid var(--ink); border-bottom:1px solid var(--rule)}
+.fig{padding:12px 12px 12px 0; display:grid; gap:4px}
+.fig + .fig{padding-left:12px; border-left:1px solid var(--rule)}
+.fig b{font:600 1.35rem/1 var(--f-display); font-stretch:95%; color:var(--cobalt); font-variant-numeric:tabular-nums}
+.fig span{font:400 .74rem/1.3 var(--f-mono); color:var(--ink-2)}
+
+.tags{display:flex; flex-wrap:wrap; gap:6px}
+.tags span{font:400 .75rem/1 var(--f-mono); padding:6px 8px; background:var(--cobalt-soft); color:var(--ink)}
+
+/* ---------- Media ---------- */
+.media{display:grid; gap:12px; align-content:start; min-width:0}
+figure{margin:0; display:grid; gap:6px}
+figure img, figure video{display:block; width:100%; max-width:100%; height:auto; background:var(--sheet); border:1px solid var(--rule)}
+figcaption{font:400 .75rem/1.4 var(--f-mono); color:var(--ink-2)}
+.grid2{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px}
+.grid3{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px}
+.sq img{aspect-ratio:1; object-fit:cover}
+.wide img{aspect-ratio:16/10; object-fit:cover}
+
+/* Placeholder slot: where Antoine adds his own media. Delete the whole <figure class="slot"> once filled. */
+.slot{border:1.5px dashed var(--todo); background:var(--todo-soft); padding:18px; display:grid; gap:6px; align-content:center; min-height:150px}
+.slot.tall{min-height:240px}
+.slot .label{color:var(--todo)}
+.slot p{font-size:.88rem; color:var(--ink)}
+.slot code{font:400 .78rem/1.4 var(--f-mono); color:var(--ink-2); word-break:break-all}
+.todo-text{background:var(--todo-soft); outline:1.5px dashed var(--todo); outline-offset:2px}
+
+/* ---------- Experience ---------- */
+.timeline{display:grid}
+.row{display:grid; grid-template-columns:150px minmax(0,1fr); gap:24px; padding-block:18px; border-top:1px solid var(--rule)}
+.row:first-child{border-top:1px solid var(--ink)}
+.row .when{font:400 .82rem/1.5 var(--f-mono); color:var(--ink-2); font-variant-numeric:tabular-nums}
+.row h3{font-size:1.08rem; font-weight:650; font-stretch:100%}
+.row h3 small{font:400 .9rem var(--f-body); color:var(--ink-2)}
+.row p{color:var(--ink); max-width:var(--measure); margin-top:4px}
+
+/* ---------- Certificates ---------- */
+.certs{display:grid; grid-template-columns:repeat(auto-fill,minmax(250px,1fr)); gap:0; border-top:1px solid var(--ink)}
+.cert{padding:16px 16px 16px 0; border-bottom:1px solid var(--rule); display:grid; gap:4px}
+.cert h3{font:600 1rem/1.3 var(--f-body)}
+.cert .status{font:500 .72rem/1 var(--f-mono); letter-spacing:.06em; text-transform:uppercase}
+.status.done{color:var(--cobalt)}
+.status.prog{color:var(--ink-2)}
+
+/* ---------- Skills ---------- */
+.skills{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:24px; border-top:1px solid var(--ink); padding-top:20px}
+.skills h3{font:600 .95rem/1.3 var(--f-body); margin-bottom:8px}
+.skills ul{list-style:none; padding:0; margin:0; display:grid; gap:4px; color:var(--ink-2); font-size:.93rem}
+
+footer{margin-top:64px; padding-block:32px 48px; border-top:1px solid var(--ink); display:flex; flex-wrap:wrap; justify-content:space-between; gap:16px}
+footer p{font:400 .85rem var(--f-mono); color:var(--ink-2)}
+
+@media (max-width:860px){
+  .project{grid-template-columns:minmax(0,1fr)}
+  .project .media{order:-1}
+}
+@media (max-width:520px){
+  .row{grid-template-columns:minmax(0,1fr); gap:4px}
+  .grid3{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (prefers-reduced-motion:no-preference){
+  .btn{transition:background .15s, color .15s}
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+<header class="top">
+  <p class="label">Robotics engineer · Lausanne, Switzerland</p>
+  <h1 class="name">Antoine<br>Hinary</h1>
+  <p class="role">I build robots that see and act: <em>perception</em> trained from synthetic data, <em>control</em> written into flight firmware, and <em>embedded</em> systems that run it on real hardware. MSc Robotics, EPFL.</p>
+  <div class="actions">
+    <a class="btn primary" href="reports/Antoine_Hinary_CV.pdf" target="_blank" rel="noopener">Download CV (PDF)</a>
+    <!-- ADD: your real LinkedIn and GitHub URLs below -->
+    <a class="btn" href="https://www.linkedin.com/in/YOUR-HANDLE" target="_blank" rel="noopener">LinkedIn</a>
+    <a class="btn" href="https://github.com/YOUR-HANDLE" target="_blank" rel="noopener">GitHub</a>
+  </div>
+  <div class="meta">
+    <span>antoine.ihinary@gmail.com</span>
+    <span>English · Arabic · French</span>
+  </div>
+</header>
+
+<!-- ================= PROJECTS ================= -->
+<section class="block" id="projects">
+  <div class="sec-head"><h2>Selected projects</h2><span class="label">Reports linked on each project</span></div>
+
+  <!-- ---------- 1. MASTER THESIS ---------- -->
+  <article class="project" id="thesis">
+    <div class="text">
+      <div class="ctx"><span class="label">Master thesis · Grivix, Zurich</span><span class="label">10/2025 – 04/2026</span></div>
+      <h3>Synthetic-only 6D pose estimation for robotic megawatt EV charging</h3>
+      <p class="desc">Heavy electric trucks charge at megawatt power through a connector with sub-centimetre tolerances, so plugging in is a job for a robot. I built a monocular RGB pipeline that learns the inlet's 6D pose entirely from CAD-generated images, with no real training photos, and drives a UR5e arm to dock the charger.</p>
+      <ul class="points">
+        <li>Photorealistic synthetic datasets in BlenderProc with domain randomization and sensor-effect injection</li>
+        <li>YOLOv11-Pose keypoints + EPnP/RANSAC for 6D pose, closed-loop visual servoing</li>
+        <li>Exported to ONNX and accelerated with TensorRT on a Jetson Orin AGX</li>
+        <li>300+ fully autonomous docking trials on real hardware</li>
+      </ul>
+      <div class="figs">
+        <div class="fig"><b>1.77 mm</b><span>planar translation error</span></div>
+        <div class="fig"><b>4.5°</b><span>rotation error</span></div>
+        <div class="fig"><b>94%</b><span>alignment success</span></div>
+        <div class="fig"><b>40 ms</b><span>perception latency, ≈25 FPS</span></div>
+      </div>
+      <div class="tags"><span>PyTorch</span><span>YOLOv11-Pose</span><span>BlenderProc</span><span>ONNX</span><span>TensorRT</span><span>Jetson Orin</span><span>UR5e</span></div>
+      <div class="actions"><a class="btn" href="reports/master-thesis.pdf" target="_blank" rel="noopener">Read the thesis paper (PDF)</a></div>
+    </div>
+    <div class="media">
+      <figure>
+        <video src="assets/video/thesis-demo.mp4" poster="assets/img/thesis-demo-poster.jpg" controls muted playsinline preload="metadata"></video>
+        <figcaption>Demo: autonomous alignment and docking</figcaption>
+      </figure>
+      <figure class="wide">
+        <img src="assets/img/thesis-station-cad.jpg" alt="CAD model of the charging station enclosure with the robotic arm inside" loading="lazy">
+        <figcaption>Charging station concept (CAD)</figcaption>
+      </figure>
+      <div class="grid3">
+        <figure class="sq"><img src="assets/img/thesis-synthetic-1.jpg" alt="Synthetic render of the MCS inlet on a rocky background" loading="lazy"><figcaption>Synthetic sample</figcaption></figure>
+        <figure class="sq"><img src="assets/img/thesis-synthetic-2.jpg" alt="Synthetic render of the MCS inlet on a wooden table" loading="lazy"><figcaption>Synthetic sample</figcaption></figure>
+        <figure class="sq"><img src="assets/img/thesis-gt-board.jpg" alt="MCS inlet surrounded by ArUco markers for ground truth" loading="lazy"><figcaption>Ground-truth board</figcaption></figure>
+      </div>
+      <figure class="wide">
+        <img src="assets/img/thesis-testbench.jpg" alt="MCS inlet facing the charger with a Basler camera mounted on the end effector" loading="lazy">
+        <figcaption>Testbench: inlet, MCS charger and end-effector camera</figcaption>
+      </figure>
+      <!-- ADD: a second thesis video (e.g. a full docking trial or the keypoint overlay view).
+           Save it as assets/video/thesis-docking.mp4, then replace this slot with:
+           <figure><video src="assets/video/thesis-docking.mp4" controls muted playsinline preload="metadata"></video><figcaption>...</figcaption></figure> -->
+      <figure class="slot">
+        <span class="label">Add video</span>
+        <p>Full docking trial or the live keypoint overlay from the camera.</p>
+        <code>assets/video/thesis-docking.mp4</code>
+      </figure>
+    </div>
+  </article>
+
+  <!-- ---------- 2. AVIAN DRONE ---------- -->
+  <article class="project" id="drone">
+    <div class="text">
+      <div class="ctx"><span class="label">Semester project · EPFL Laboratory of Intelligent Systems</span><span class="label">09/2024 – 01/2025</span></div>
+      <h3>Body-rate controller for an avian-inspired morphing drone</h3>
+      <p class="desc">The LisRaptor flies like a bird: it steers with morphing wings and tail instead of only propellers. I wrote a body-rate controller that uses every actuator to track attitude setpoints, directly inside the PX4 autopilot, so the drone needs no external onboard computer.</p>
+      <ul class="points">
+        <li>Custom control laws and actuator allocation in PX4 firmware (C++)</li>
+        <li>Allocation built from an effectiveness / sensitivity matrix of the morphing surfaces</li>
+        <li>State estimation and control loops under real-time constraints, MAVLink for testing</li>
+        <li>Validated in simulation and on hardware: roll tracking through wing-sweep actuation</li>
+      </ul>
+      <div class="figs">
+        <div class="fig"><b>7 DoF</b><span>actuated: thrust + 6 surfaces</span></div>
+        <div class="fig"><b>PX4</b><span>runs on the flight controller</span></div>
+        <div class="fig"><b>0</b><span>external computers needed</span></div>
+      </div>
+      <div class="tags"><span>PX4</span><span>C++</span><span>MAVLink</span><span>QGroundControl</span><span>Control allocation</span></div>
+      <div class="actions"><a class="btn" href="reports/avian-drone-body-rate-controller.pdf" target="_blank" rel="noopener">Read the report (PDF)</a></div>
+    </div>
+    <div class="media">
+      <!-- ADD: flight / bench-test video of the drone.
+           Save it as assets/video/drone-test.mp4, then replace this slot with:
+           <figure><video src="assets/video/drone-test.mp4" controls muted playsinline preload="metadata"></video><figcaption>...</figcaption></figure> -->
+      <figure class="slot tall">
+        <span class="label">Add video</span>
+        <p>Test video of the controller: the drone rolling as the wings sweep.</p>
+        <code>assets/video/drone-test.mp4</code>
+      </figure>
+      <figure>
+        <img src="assets/img/drone-lis-raptor.jpg" alt="The white avian-inspired LisRaptor drone with spread wings and tail" loading="lazy">
+        <figcaption>LisRaptor, the avian-inspired platform (EPFL LIS)</figcaption>
+      </figure>
+    </div>
+  </article>
+
+  <!-- ---------- 3. ROCKET MPC ---------- -->
+  <article class="project" id="rocket">
+    <div class="text">
+      <div class="ctx"><span class="label">Course project · EPFL Model Predictive Control (Prof. C. Jones)</span><span class="label">01/2024</span></div>
+      <h3>Model predictive control of a thrust-vectored rocket</h3>
+      <p class="desc">A small rocket prototype steered by gimballed racing propellers. With Nour Lachat and Aubane Lachat, I designed linear and nonlinear MPC controllers that make it fly a 3D path, then made them robust to a changing mass and to actuation delay.</p>
+      <ul class="points">
+        <li>Split the linearised 12-state model into four independent subsystems (x, y, z, roll)</li>
+        <li>Linear MPC with terminal invariant sets, tracking, and soft constraints</li>
+        <li>Offset-free tracking with a disturbance estimator, tested with fuel burn (changing mass)</li>
+        <li>Full nonlinear MPC (RK4 integration) with delay compensation</li>
+      </ul>
+      <div class="figs">
+        <div class="fig"><b>12</b><span>states</span></div>
+        <div class="fig"><b>4</b><span>decoupled subsystems</span></div>
+        <div class="fig"><b>NMPC</b><span>with delay compensation</span></div>
+      </div>
+      <div class="tags"><span>MATLAB</span><span>MPC</span><span>NMPC</span><span>YALMIP</span><span>MPT3</span><span>State estimation</span></div>
+      <div class="actions"><a class="btn" href="reports/rocket-mpc.pdf" target="_blank" rel="noopener">Read the report (PDF)</a></div>
+    </div>
+    <div class="media">
+      <!-- ADD: screen recording of the simulation (the rocket flying the trajectory).
+           Save it as assets/video/rocket-sim.mp4, then replace this slot with a <video> like above. -->
+      <figure class="slot">
+        <span class="label">Add video</span>
+        <p>Screen recording of the rocket simulation following the path.</p>
+        <code>assets/video/rocket-sim.mp4</code>
+      </figure>
+      <figure>
+        <img src="assets/img/rocket-trajectory.jpg" alt="3D plot of the rocket tracking a reference path with the nonlinear MPC" loading="lazy">
+        <figcaption>NMPC tracking a 3D reference path (simulation)</figcaption>
+      </figure>
+    </div>
+  </article>
+
+  <!-- ---------- 4. FPGA MOVEMENT DETECTION ---------- -->
+  <article class="project" id="fpga">
+    <div class="text">
+      <div class="ctx"><span class="label">Course project · EPFL Embedded Systems Design (CS-476)</span></div>
+      <h3>Real-time movement detection on an FPGA system-on-chip</h3>
+      <p class="desc">Camera in, HDMI out: Sobel edge detection followed by frame differencing to show what moves. With Marc Nassif, I profiled the pipeline and moved the bottlenecks into hardware until the video became responsive.</p>
+      <ul class="points">
+        <li>Separable Sobel filter in software, then a DMA-fed implementation</li>
+        <li>Custom Verilog instructions for the Sobel kernel and movement decoding</li>
+        <li>Word-level bit packing to cut memory traffic and CPU stalls</li>
+      </ul>
+      <div class="figs">
+        <div class="fig"><b>212M → 14.1M</b><span>cycles per frame</span></div>
+        <div class="fig"><b>15×</b><span>faster overall</span></div>
+        <div class="fig"><b>0.3 → 5 fps</b><span>output video</span></div>
+      </div>
+      <div class="tags"><span>C</span><span>Verilog</span><span>FPGA</span><span>DMA</span><span>Custom instructions</span></div>
+      <div class="actions">
+        <a class="btn" href="https://youtu.be/5rFBaMkaR-A" target="_blank" rel="noopener">Watch the demo on YouTube</a>
+        <a class="btn" href="reports/fpga-movement-detection.pdf" target="_blank" rel="noopener">Read the report (PDF)</a>
+      </div>
+    </div>
+    <div class="media">
+      <!-- ADD: a screenshot from the YouTube demo or a photo of the board + camera.
+           Save it as assets/img/fpga-demo.jpg, then replace this slot with:
+           <figure><img src="assets/img/fpga-demo.jpg" alt="..." loading="lazy"><figcaption>...</figcaption></figure> -->
+      <figure class="slot tall">
+        <span class="label">Add image</span>
+        <p>A frame from the YouTube demo (edges + movement output) or a photo of the board and camera.</p>
+        <code>assets/img/fpga-demo.jpg</code>
+      </figure>
+    </div>
+  </article>
+
+  <!-- ---------- 5. MINI RACE CAR (to fill in) ---------- -->
+  <article class="project" id="race-car">
+    <div class="text">
+      <!-- ADD: replace the highlighted text with the real context, dates, description and numbers. -->
+      <div class="ctx"><span class="label todo-text">Project type · where</span><span class="label todo-text">MM/YYYY</span></div>
+      <h3>Autonomous mini race car</h3>
+      <p class="desc todo-text">Two or three sentences: what the car had to do, what you built (perception, planning, control?) and how it performed.</p>
+      <div class="figs">
+        <div class="fig"><b class="todo-text">—</b><span>key result, e.g. lap time</span></div>
+        <div class="fig"><b class="todo-text">—</b><span>key result, e.g. top speed</span></div>
+      </div>
+      <!-- ADD: once you have the report, save it as reports/mini-race-car.pdf and uncomment:
+      <div class="actions"><a class="btn" href="reports/mini-race-car.pdf" target="_blank" rel="noopener">Read the report (PDF)</a></div> -->
+    </div>
+    <div class="media">
+      <!-- ADD: any photo of the car (on the track is best). Save as assets/img/race-car.jpg -->
+      <figure class="slot tall">
+        <span class="label">Add image</span>
+        <p>A photo of the car, ideally on the track. A CAD render or a plot of the driven line also works.</p>
+        <code>assets/img/race-car.jpg</code>
+      </figure>
+    </div>
+  </article>
+</section>
+
+<!-- ================= EXPERIENCE ================= -->
+<section class="block" id="experience">
+  <div class="sec-head"><h2>Experience</h2></div>
+  <div class="timeline">
+    <div class="row">
+      <span class="when">01/2026 – now</span>
+      <div><h3>Vice President of Product Development <small>· Neurovia Bioelectronics, Geneva</small></h3>
+      <p>Multiplexer PCB for an in-human cortical ECoG stimulation array, STM32 firmware for channel switching and fault detection, and a desktop/web GUI driving a Blackrock stimulator.</p></div>
+    </div>
+    <div class="row">
+      <span class="when">10/2025 – 04/2026</span>
+      <div><h3>Master thesis <small>· Grivix, Zurich</small></h3>
+      <p>Synthetic-data 6D pose estimation and autonomous docking for megawatt EV charging (see above).</p></div>
+    </div>
+    <div class="row">
+      <span class="when">02/2025 – 10/2025</span>
+      <div><h3>Robotics Engineer <small>· Grivix, Zurich</small></h3>
+      <p>Mechanical architecture and actuator dimensioning of a 6-DoF industrial manipulator: load analysis, torque sizing and motion constraints.</p></div>
+    </div>
+    <div class="row">
+      <span class="when">09/2024 – 09/2025</span>
+      <div><h3>Project Manager &amp; Vice President <small>· EPFL Xplore</small></h3>
+      <p>Led a team of 60+ engineers building a rover and drone platform for competition: integration across mechanical, electrical and software teams, milestones and system validation.</p></div>
+    </div>
+    <div class="row">
+      <span class="when">06/2024 – 08/2024</span>
+      <div><h3>Control Automation Intern <small>· Elythor, Lausanne</small></h3>
+      <p>Unified controller architecture for a morphing bicopter tailsitter, minimum-snap trajectory generation, ROS2 simulation and firmware support.</p></div>
+    </div>
+  </div>
+  <!-- ADD (optional): a photo of the Xplore rover/drone would make a strong extra project block. -->
+</section>
+
+<!-- ================= EDUCATION + CERTIFICATES ================= -->
+<section class="block" id="education">
+  <div class="sec-head"><h2>Education &amp; certificates</h2></div>
+  <div class="timeline">
+    <div class="row">
+      <span class="when">09/2023 – 05/2026</span>
+      <div><h3>MSc Robotics <small>· EPFL</small></h3><p>Machine learning, computer vision and automatic control.</p></div>
+    </div>
+    <div class="row">
+      <span class="when">09/2020 – 07/2023</span>
+      <div><h3>BSc Microengineering <small>· EPFL</small></h3><p>Top 15% of the cohort, GPA 5.28 / 6.</p></div>
+    </div>
+  </div>
+  <!-- ADD: one .cert block per certificate. Link the badge or certificate URL in the title when you have it. -->
+  <div class="certs" style="margin-top:28px">
+    <div class="cert"><span class="status done">Completed</span><h3>AI Agents Course</h3><span class="label">Hugging Face</span></div>
+    <div class="cert"><span class="status prog">In progress</span><h3>LLM Course</h3><span class="label">Hugging Face</span></div>
+    <div class="cert"><span class="status prog">Planned</span><h3 class="todo-text">NVIDIA certification (name)</h3><span class="label">NVIDIA</span></div>
+  </div>
+</section>
+
+<!-- ================= SKILLS ================= -->
+<section class="block" id="skills">
+  <div class="sec-head"><h2>Toolbox</h2></div>
+  <div class="skills">
+    <div><h3>Perception &amp; ML</h3><ul><li>PyTorch, YOLO, keypoint pose</li><li>ONNX export, TensorRT</li><li>OpenCV, camera calibration</li><li>Synthetic data (BlenderProc)</li></ul></div>
+    <div><h3>Control &amp; autonomy</h3><ul><li>PX4 firmware, MAVLink</li><li>MPC / NMPC, state estimation</li><li>Minimum-snap trajectories</li><li>ROS2, UR RTDE</li></ul></div>
+    <div><h3>Embedded &amp; hardware</h3><ul><li>C/C++ real-time, STM32</li><li>FPGA, Verilog, DMA</li><li>PCB design, serial protocols</li><li>Fusion CAD, actuator sizing</li></ul></div>
+  </div>
+</section>
+
+<footer>
+  <p>Antoine Hinary · antoine.ihinary@gmail.com</p>
+  <p>Lausanne, Switzerland</p>
+</footer>
+
+</div>
+</body>
+</html>
