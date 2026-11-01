@@ -167,7 +167,7 @@ const SHOW_EMPTY_SLOTS = true;
         ctx.fillStyle = on ? 'rgba(127,227,255,1)' : 'rgba(236,242,247,.22)'; ctx.fill();
       }
       ctx.fillStyle = 'rgba(236,242,247,.9)'; ctx.fillRect(mux[0] - 34, mux[1] - 9, 68, 18);
-      ctx.fillStyle = '#050607'; ctx.font = '600 10px "IBM Plex Mono", monospace'; ctx.textAlign = 'center';
+      ctx.fillStyle = '#13234a'; ctx.font = '600 10px "IBM Plex Mono", monospace'; ctx.textAlign = 'center';
       ctx.fillText('MUX', mux[0], mux[1] + 3.5);
       ctx.textAlign = 'left'; ctx.fillStyle = 'rgba(127,227,255,.9)';
       ctx.fillText('CH ' + String(active + 1).padStart(2, '0') + ' · CH ' + String(((active + 17) % 48) + 1).padStart(2, '0'), 14, 20);
