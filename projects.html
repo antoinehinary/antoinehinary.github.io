@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Projects · Antoine Hinary</title>
-<meta name="description" content="Robotics projects by Antoine Hinary: 6D pose estimation, flexible robots, rovers, drones, MPC and embedded systems.">
+<meta name="description" content="Robotics projects by Antoine Hinary: 6D pose estimation, LLM drone agents, flexible robots, rovers, drones, MPC and embedded systems.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Michroma&family=Manrope:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
@@ -77,8 +77,35 @@
     </div>
   </article>
 
+  <!-- SKYPILOT AGENT -->
+  <article class="project flip" id="skypilot" data-tags="perception control">
+    <div class="text">
+      <div class="ctx"><span class="eyebrow ice">Personal project · Open source</span><span class="eyebrow">10/2026 – 11/2026</span></div>
+      <h3>SkyPilot Agent: an LLM that flies a drone</h3>
+      <p class="desc">An LLM agent that flies a simulated Crazyflie from plain-language missions like "find the red box". It plans, calls drone tools over MCP, locates objects with its onboard camera, and every command goes through a safety layer that can refuse it and say why. Everything runs locally: the model in Ollama, the physics in PyBullet.</p>
+      <ul class="points">
+        <li>smolagents CodeAgent driving a FastMCP server: the agent only sees typed tools (takeoff, goto, find_objects, land…), never the simulator</li>
+        <li>Safety guard enforcing geofence, altitude, speed, battery and mission-time limits, with the nearest allowed command on refusal</li>
+        <li>Colour detection projected to the ground through camera intrinsics, plus a search planner that tiles the geofence</li>
+        <li>10-mission benchmark scored on the drone's verified final state, not the agent's own report</li>
+      </ul>
+      <div class="figs">
+        <div class="fig"><b>8/10</b><span>missions, qwen3:8b</span></div>
+        <div class="fig"><b>5 → 8</b><span>from clearer tool feedback</span></div>
+        <div class="fig"><b>~20 s</b><span>per mission</span></div>
+        <div class="fig"><b>100%</b><span>safety checks held</span></div>
+      </div>
+      <div class="tags"><span>Python</span><span>smolagents</span><span>MCP</span><span>Ollama</span><span>Qwen3</span><span>PyBullet</span><span>Crazyflie</span></div>
+      <div class="actions"><a class="btn ghost" href="https://github.com/antoinehinary/skypilot-agent" target="_blank" rel="noopener">View on GitHub</a></div>
+    </div>
+    <div class="media">
+      <figure class="frame"><img src="assets/img/skypilot-find-red-box.gif" alt="Simulated drone searching for and locating a red box from a text mission" loading="lazy"><span class="readout">MISSION · FIND THE RED BOX</span></figure>
+      <figure><img src="assets/img/skypilot-square.gif" alt="Simulated drone flying a square pattern commanded in plain language" loading="lazy"><figcaption>Mission: fly a square</figcaption></figure>
+    </div>
+  </article>
+
   <!-- FLEXIBLE CHARGING ROBOT -->
-  <article class="project flip" id="flex-robot" data-tags="hardware">
+  <article class="project" id="flex-robot" data-tags="hardware">
     <div class="text">
       <div class="ctx"><span class="eyebrow ice">Robotics engineer · Grivix, Zurich</span><span class="eyebrow">02/2025 – 10/2025</span></div>
       <h3>Flexible 6-DoF charging robot</h3>
@@ -104,7 +131,7 @@
   </article>
 
   <!-- NEUROVIA -->
-  <article class="project" id="neurovia" data-tags="hardware">
+  <article class="project flip" id="neurovia" data-tags="hardware">
     <div class="text">
       <div class="ctx"><span class="eyebrow ice">VP of Product Development · Neurovia Bioelectronics, Geneva</span><span class="eyebrow">01/2026 – now</span></div>
       <h3>Cortical neurostimulation system</h3>
@@ -123,7 +150,7 @@
   </article>
 
   <!-- ERC / XPLORE (engineering + leadership) -->
-  <article class="project flip" id="erc" data-tags="leadership hardware">
+  <article class="project" id="erc" data-tags="leadership hardware">
     <div class="text">
       <div class="ctx"><span class="eyebrow ice">Project Manager &amp; Vice President · EPFL Xplore</span><span class="eyebrow">09/2024 – 09/2025</span></div>
       <h3>Phoenyx rover · ERC 2025 champions</h3>
@@ -151,7 +178,7 @@
   </article>
 
   <!-- AVIAN DRONE -->
-  <article class="project" id="drone" data-tags="control hardware">
+  <article class="project flip" id="drone" data-tags="control hardware">
     <div class="text">
       <div class="ctx"><span class="eyebrow ice">Semester project · EPFL Laboratory of Intelligent Systems</span><span class="eyebrow">09/2024 – 01/2025</span></div>
       <h3>Body-rate controller for an avian-inspired drone</h3>
@@ -179,7 +206,7 @@
   </article>
 
   <!-- MINI RACE CAR -->
-  <article class="project flip" id="race-car" data-tags="control">
+  <article class="project" id="race-car" data-tags="control">
     <div class="text">
       <div class="ctx"><span class="eyebrow ice">Autonomous driving · ROS 2</span></div>
       <h3>Autonomous mini race car</h3>
@@ -203,7 +230,7 @@
   </article>
 
   <!-- ROCKET MPC -->
-  <article class="project" id="rocket" data-tags="control">
+  <article class="project flip" id="rocket" data-tags="control">
     <div class="text">
       <div class="ctx"><span class="eyebrow ice">Course project · EPFL Model Predictive Control</span><span class="eyebrow">01/2024</span></div>
       <h3>Model predictive control of a thrust-vectored rocket</h3>
@@ -228,7 +255,7 @@
   </article>
 
   <!-- FPGA -->
-  <article class="project flip" id="fpga" data-tags="hardware perception">
+  <article class="project" id="fpga" data-tags="hardware perception">
     <div class="text">
       <div class="ctx"><span class="eyebrow ice">Course project · EPFL Embedded Systems Design</span></div>
       <h3>Real-time movement detection on an FPGA</h3>
